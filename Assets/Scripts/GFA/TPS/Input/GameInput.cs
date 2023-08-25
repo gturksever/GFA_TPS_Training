@@ -55,6 +55,24 @@ namespace GFA.TPS.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PoinerPosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""5a6e8fa2-fa79-4292-924c-5f0ddcc2fe5d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""833e42e4-4618-458f-b0e1-9fb4d3d04fdc"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -222,6 +240,28 @@ namespace GFA.TPS.Input
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7c9a563-4893-49a5-aded-6ed072681a89"",
+                    ""path"": ""<Pointer>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""PoinerPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9fab379-0937-4e36-806c-312e4b705a45"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -261,6 +301,8 @@ namespace GFA.TPS.Input
             m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
             m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
             m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
+            m_Player_PoinerPosition = m_Player.FindAction("PoinerPosition", throwIfNotFound: true);
+            m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -325,6 +367,8 @@ namespace GFA.TPS.Input
         private readonly InputAction m_Player_Movement;
         private readonly InputAction m_Player_Dodge;
         private readonly InputAction m_Player_Shoot;
+        private readonly InputAction m_Player_PoinerPosition;
+        private readonly InputAction m_Player_Look;
         public struct PlayerActions
         {
             private @GameInput m_Wrapper;
@@ -332,6 +376,8 @@ namespace GFA.TPS.Input
             public InputAction @Movement => m_Wrapper.m_Player_Movement;
             public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
             public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
+            public InputAction @PoinerPosition => m_Wrapper.m_Player_PoinerPosition;
+            public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -350,6 +396,12 @@ namespace GFA.TPS.Input
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @PoinerPosition.started += instance.OnPoinerPosition;
+                @PoinerPosition.performed += instance.OnPoinerPosition;
+                @PoinerPosition.canceled += instance.OnPoinerPosition;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -363,6 +415,12 @@ namespace GFA.TPS.Input
                 @Shoot.started -= instance.OnShoot;
                 @Shoot.performed -= instance.OnShoot;
                 @Shoot.canceled -= instance.OnShoot;
+                @PoinerPosition.started -= instance.OnPoinerPosition;
+                @PoinerPosition.performed -= instance.OnPoinerPosition;
+                @PoinerPosition.canceled -= instance.OnPoinerPosition;
+                @Look.started -= instance.OnLook;
+                @Look.performed -= instance.OnLook;
+                @Look.canceled -= instance.OnLook;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -403,6 +461,8 @@ namespace GFA.TPS.Input
             void OnMovement(InputAction.CallbackContext context);
             void OnDodge(InputAction.CallbackContext context);
             void OnShoot(InputAction.CallbackContext context);
+            void OnPoinerPosition(InputAction.CallbackContext context);
+            void OnLook(InputAction.CallbackContext context);
         }
     }
 }
