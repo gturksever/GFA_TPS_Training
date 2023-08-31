@@ -83,7 +83,7 @@ namespace GFA.TPS.Movement
                     transform.forward = reflectedDirection;
                 }
 
-                targetPosition = hit.point;
+                targetPosition = hit.point + transform.forward * 0.01f;
 
                 Impacted?.Invoke(hit);
                
