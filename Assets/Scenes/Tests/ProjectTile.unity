@@ -1399,14 +1399,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3465293536047272465, guid: 462ef0b2a0fd6334eb8a2cdfa4d0fe9b,
         type: 3}
-      propertyPath: _recoil
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3465293536047272465, guid: 462ef0b2a0fd6334eb8a2cdfa4d0fe9b,
-        type: 3}
-      propertyPath: _accuaracy
-      value: 0.944
-      objectReference: {fileID: 0}
+      propertyPath: _weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 6eceff77b35970c4b9345b4c03b0688d,
+        type: 2}
     - target: {fileID: 8915846634402445882, guid: 462ef0b2a0fd6334eb8a2cdfa4d0fe9b,
         type: 3}
       propertyPath: m_Name

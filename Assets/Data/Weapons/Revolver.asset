@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Revolver
   m_EditorClassIdentifier: 
   _fireRate: 0.6
-  _accuaracy: 0.7
-  _recoil: 0.05
-  _recoilFade: 0.1
+  _accuracy: 0.9
+  _recoil: 0.01
+  _recoilFade: 0.5
   _projectilePrefab: {fileID: 0}
+  _weaponGraphics: {fileID: 4890980120822421430, guid: f8a43b3ab46c4004598ca947fc42b043,
+    type: 3}
